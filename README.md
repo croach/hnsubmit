@@ -4,6 +4,14 @@ This script will submit a new story to Hacker News. It can be used to submit
 a story at the peak time for Hacker News submissions and, as such, it is meant
 to be used in conjunction with a job scheduler, such as cron or atrun.
 
+## Installing the script
+
+Basically, you just need to download the source and install all of the requirements, which at this point in time is just the [requests][1] library.
+
+    $ git clone https://github.com/croach/hn_submitter.git
+    $ cd hn_submitter
+    $ pip install -r requirements.txt
+
 ## Scheduling a story
 
 To schedule a one off story submission using the at command on OS X, you'll
@@ -42,3 +50,10 @@ following commands:
 
     $ chmod +x story.sh
     $ at -f story.sh 8am tomorrow
+
+## To Do
+
+1. Get rid of the dependency on [requests][1], so a virtualenv is not needed to run this script.
+
+
+[1]: http://docs.python-requests.org/en/latest/
