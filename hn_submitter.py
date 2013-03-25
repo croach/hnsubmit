@@ -39,6 +39,9 @@ following commands:
 
     $ chmod +x story.sh
     $ at -f story.sh 8am tomorrow
+    
+Incidentally, the best time to post to Hacker News appears to be right around
+9AM to 10AM (US EST) according to http://bit.ly/109ajif.
 """
 
 import os
