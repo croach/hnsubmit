@@ -5,3 +5,6 @@
 \#*\#
 *~
 
+# Logs and story scripts
+log
+*.sh
