@@ -48,6 +48,7 @@ import os
 import sys
 import re
 import urlparse
+import argparse
 
 import requests
 
@@ -171,9 +172,24 @@ def main(title, url, username, password):
 
 
 if __name__ == '__main__':
-    title = os.environ['HN_SUBMITTER_STORY_TITLE']
-    url = os.environ['HN_SUBMITTER_STORY_URL']
-    username = os.environ['HN_SUBMITTER_USERNAME']
-    password = os.environ['HN_SUBMITTER_PASSWORD']
-    main(title, url, username, password)
+    parser = argparse.ArgumentParser(description='Hacker News story submitter')
+    parser.add_argument('-t', '--title',
+        action='store',
+        default=os.environ.get('HN_SUBMITTER_STORY_TITLE', ''),
+        help='title of the story')
+    parser.add_argument('-U', '--URL',
+        action='store',
+        default=os.environ.get('HN_SUBMITTER_STORY_URL', ''),
+        help='URL for the story',
+        dest='url')
+    parser.add_argument('-u', '--username',
+        action='store',
+        default=os.environ.get('HN_SUBMITTER_USERNAME', ''),
+        help='username for the Hacker News user account')
+    parser.add_argument('-p', '--password',
+        action='store',
+        default=os.environ.get('HN_SUBMITTER_PASSWORD', ''),
+        help='password for the Hacker News user account')
+    args = parser.parse_args()
+    main(**vars(args))
 
