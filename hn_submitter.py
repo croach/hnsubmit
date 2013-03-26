@@ -39,7 +39,7 @@ following commands:
 
     $ chmod +x story.sh
     $ at -f story.sh 8am tomorrow
-    
+
 Incidentally, the best time to post to Hacker News appears to be right around
 9AM to 10AM (US EST) according to http://bit.ly/109ajif.
 """
@@ -141,15 +141,16 @@ def submit_story(s, title, url):
     if res.status_code != 200:
         raise Exception('Could not submit the story')
 
-    # Make sure the story submission was succesful by checking the title of
-    # the response page. If it was "New Links", the submission was a success.
-    # Otherwise, print out the resultant HTML, so that this script can be
-    # updated with other options.
-    page_title = re.search(r'<title>([^|]+)| Hacker News</title>', res.content).groups()[0].strip()
-    if page_title == 'New Links':
+    # Make sure the story submission was succesful by checking the filepath
+    # portion of the resultant URL. If we're sent to the main page, the
+    # submission was a success. If it was 'item', the story has already been
+    # submitted. Otherwise, there was a problem with the submission, print out
+    # the resultant HTML, so that this script can be
+    filepath = urlparse.urlparse(res.url).path.strip('/')
+    if filepath in ['news', '']:
         success = True
         message = 'Story Submission Success!'
-    elif page_title == title:
+    elif filepath == 'item':
         matches = re.search(r'<a href="(?P<url>user\?id=(?P<user>[^\"]+))">', res.content)
         user = matches.group('user')
         user_url = urlparse.urljoin(HN_URL, matches.group('url'))
