@@ -1,7 +1,7 @@
 """
-This script will submit a new story to Hacker News. It can be used to submit
-a story at the peak time for Hacker News submissions and, as such, it is meant
-to be used in conjunction with a job scheduler, such as cron or atrun.
+Submits a new story to Hacker News. It can be used to submit a story at the
+peak time for Hacker News submissions and, as such, it is meant to be used
+in conjunction with a job scheduler, such as cron or atrun.
 
 To schedule a one off story submission using the at command on OS X, you'll
 first need to enable atrun which is disabled by default on OS X systems. To
@@ -173,24 +173,29 @@ def main(title, url, username, password):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Hacker News story submitter')
+    parser = argparse.ArgumentParser(
+        epilog=__doc__,
+        formatter_class=argparse.RawTextHelpFormatter)
     parser.add_argument('-t', '--title',
         action='store',
         default=os.environ.get('HN_SUBMITTER_STORY_TITLE', ''),
         help='title of the story')
     parser.add_argument('-U', '--URL',
         action='store',
-        default=os.environ.get('HN_SUBMITTER_STORY_URL', ''),
+        default=os.environ.get('HN_SUBMITTER_STORY_URL', None),
         help='URL for the story',
         dest='url')
     parser.add_argument('-u', '--username',
         action='store',
-        default=os.environ.get('HN_SUBMITTER_USERNAME', ''),
+        default=os.environ.get('HN_SUBMITTER_USERNAME', None),
         help='username for the Hacker News user account')
     parser.add_argument('-p', '--password',
         action='store',
-        default=os.environ.get('HN_SUBMITTER_PASSWORD', ''),
+        default=os.environ.get('HN_SUBMITTER_PASSWORD', None),
         help='password for the Hacker News user account')
     args = parser.parse_args()
-    main(**vars(args))
+    if not (args.url and args.username and args.password):
+        parser.print_usage()
+        sys.exit(1)
+    # main(**vars(args))
 
