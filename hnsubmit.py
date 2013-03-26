@@ -197,5 +197,4 @@ if __name__ == '__main__':
     if not (args.url and args.username and args.password):
         parser.print_usage()
         sys.exit(1)
-    # main(**vars(args))
-
+    main(**vars(args))
