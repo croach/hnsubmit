@@ -10,7 +10,7 @@ The reason for this script can be found in [this article][2]. In the article, Ha
 
 Basically, you just need to download the source and install all of the requirements, which at this point in time is just the [requests][1] library.
 
-    $ git clone https://github.com/croach/hn_submitter.git
+    $ git clone git@github.com:croach/hnsubmit.git
     $ cd hn_submitter
     $ pip install -r requirements.txt
 
