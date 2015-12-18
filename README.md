@@ -54,7 +54,7 @@ following commands:
     $ at -f story.sh 8am tomorrow
     
 ### Prevent Sleep
-Sadly the cron job will not execute if you system goes to sleep. One way to prevent sleep on OSX is to use `caffeinate`.
+Sadly, the cron job will not execute if your system goes to sleep. One way to prevent sleep on OSX is to use `caffeinate`.
 To prevent OSX from sleeping for the next 24 hours run `caffeinate -t 864000 &`.
 
 ## To Do
