@@ -41,7 +41,7 @@ script. An example can be seen below:
     # stderr to stdout. Otherwise, if there's an error, it gets sent to stdout
     # before stdout is redirected to the log file and we lose all of the error
     # information.
-    /virtualenv/bin/python hn_submitter.py >> /path/to/log 2>&1
+    /virtualenv/bin/python hnsubmit.py >> /path/to/log 2>&1
 
 Note: By giving the full path to the python executable, you can choose the
 python executable associated with a specific virtualenv which will make the
